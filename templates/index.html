@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TranscribeFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <div class="flex items-center justify-center gap-3 mb-2">
+                <i class="fas fa-wave-square text-4xl text-indigo-400"></i>
+                <h1 class="text-4xl font-bold">Transcribe<span class="text-emerald-400">Flow</span></h1>
+            </div>
+            <p class="text-gray-400">Audio to AI Summary in Seconds</p>
+        </header>
+
+        <main class="space-y-8">
+            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 shadow-xl">
+                <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <i class="fas fa-upload text-indigo-400"></i>Upload Audio
+                </h2>
+                <div class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-indigo-500 transition" id="uploadBox">
+                    <i class="fas fa-file-audio text-5xl text-gray-500 mb-4"></i>
+                    <p class="text-lg font-medium mb-2">Drop audio file here</p>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-lg font-medium mb-2">
+                        <i class="fas fa-folder-open mr-2"></i>Browse Files
+                    </button>
+                    <p class="text-gray-400 text-sm">or click above to select</p>
+                    <input type="file" id="audioInput" class="hidden" accept="audio/*">
+                </div>
+                <div id="fileInfo" class="hidden mt-4 p-4 bg-gray-700 rounded-lg"></div>
+                <div class="flex gap-4 mt-6">
+                    <button id="processBtn" class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-lg font-medium flex-1 disabled:opacity-50" disabled>
+                        <i class="fas fa-play mr-2"></i>Process Audio
+                    </button>
+                    <button id="sampleBtn" class="border border-gray-600 hover:border-gray-500 px-6 py-3 rounded-lg font-medium">
+                        <i class="fas fa-vial mr-2"></i>Load Sample
+                    </button>
+                </div>
+            </div>
+
+            <div id="loading" class="hidden bg-gray-800 rounded-xl p-10 text-center border border-gray-700">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500 mx-auto mb-4"></div>
+                <p class="text-lg font-medium">Processing Audio...</p>
+                <p class="text-gray-400 text-sm mt-1">Transcribing & Summarizing</p>
+            </div>
+
+            <div id="results" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center gap-2">
+                            <i class="fas fa-file-alt text-indigo-400"></i>Transcript
+                        </h3>
+                        <span id="wordCount" class="bg-gray-700 px-3 py-1 rounded-full text-sm">0 words</span>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg h-64 overflow-y-auto mb-4">
+                        <p id="transcriptText" class="text-gray-300"></p>
+                    </div>
+                    <button class="copyBtn border border-gray-600 hover:border-indigo-500 px-4 py-2 rounded-lg text-sm w-full" data-target="transcript">
+                        <i class="fas fa-copy mr-2"></i>Copy Transcript
+                    </button>
+                </div>
+
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center gap-2">
+                            <i class="fas fa-chart-line text-emerald-400"></i>AI Summary
+                        </h3>
+                        <span id="summaryCount" class="bg-gray-700 px-3 py-1 rounded-full text-sm">0 words</span>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg h-64 overflow-y-auto mb-4">
+                        <p id="summaryText" class="text-gray-100"></p>
+                    </div>
+                    <button class="copyBtn border border-gray-600 hover:border-emerald-500 px-4 py-2 rounded-lg text-sm w-full" data-target="summary">
+                        <i class="fas fa-copy mr-2"></i>Copy Summary
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center mt-12 pt-6 border-t border-gray-800 text-gray-500 text-sm">
+            <p>TranscribeFlow • AI Audio Summarizer</p>
+        </footer>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 bg-gray-800 border-l-4 border-emerald-500 px-5 py-3 rounded-lg shadow-xl transform translate-y-20 transition"></div>
+
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
