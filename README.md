@@ -160,7 +160,7 @@ git push origin feature/kartikey-asr-logic
 
 ---
 
-## 📁 Suggested Repository Structure
+## 📁  Repository Structure
 
 ```
 transcribeflow/
